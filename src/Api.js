@@ -74,4 +74,24 @@ class CinemaApi {
         let res = await this.request(`users/${userID}/following`, {userToFollowID}, "post")
         return res
     }
+
+    static async unfollowUser(userID, userToUnfollowID) {
+        let res = await this.request(`users/following`, {userToUnfollowID}, "delete")
+        return res
+    }
+
+    static async getLikedReviews(userID) {
+        let res = await this.request(`users/${userID}/likes`)
+        return res
+    }
+
+    static async likeReview(userID, reviewID) {
+        let res = await this.request(`users/${userID}/likes`, {reviewID}, "post")
+        return res
+    }
+
+    static async unlikeReview(userID, reviewID) {
+        let res = await this.request(`users/${userID}/likes`, { reviewID }, "delete")
+        return res
+    }
 }
