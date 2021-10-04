@@ -25,9 +25,15 @@ class CinemaApi {
             throw Array.isArray(message) ? message : [message]
         }
     }
+
+    /**
+     *  USER METHODS
+     */
     
     /**
      *  Register New User
+     *  data should be 
+     *  { username, password, firstName, lastName, email, bio }
      */
 
     static async register(data) {
@@ -35,63 +41,178 @@ class CinemaApi {
         return res
     }
 
+    /**
+     *  Login existing user.
+     *  data is { username, password }
+     */
+
     static async login(data) {
         let res = await this.request(`auth/login`, data, "post")
         return res
     }
 
+    /**
+     *  Get information on a single user 
+     */
     static async getProfile(userID) {
         let res = await this.request(`users/${userID}`)
         return res
     }
 
+    /**
+     *  Allows a user to edit their own profile information
+     *  Request must have a JWT on it and the JWT must match the user in the params
+     *  Accepts { firstName, lastName, email, bio }
+     */
     static async editProfile(userID, data) {
         let res = await this.request(`users/${userID}`, data, "patch")
         return res
     }
 
+    /**
+     *  Allows a user to delete their own account
+     *  Must have a JWT and it must match the user in Params
+     */
     static async deleteProfile(userID) {
         let res = await this.request(`users/${userID}`, null, "delete")
         return res
     }
 
+    /**
+     *  Retrieve all reviews a user has written
+     */
     static async getUserReviews(userID) {
         let res = await this.request(`users/${userID}/reviews`)
         return res
     }
 
+    /**
+     *  Get all users that are followed by a given user
+     */
     static async getFollowedUsers(userID) {
         let res = await this.request(`/users/${userID}/following`)
         return res
     }
 
+    /**
+     *  Get all followers for a user
+     */
     static async getFollowers(userID) {
         let res = await this.request(`/users/${userID}/followers`)
         return res
     }
 
+    /* 
+     *   Follow a user
+     */
     static async followUser(userID, userToFollowID) {
         let res = await this.request(`users/${userID}/following`, {userToFollowID}, "post")
         return res
     }
 
+    /* 
+     *   Unfollow A user
+     */
     static async unfollowUser(userID, userToUnfollowID) {
-        let res = await this.request(`users/following`, {userToUnfollowID}, "delete")
+        let res = await this.request(`users/${userID}/following`, {userToUnfollowID}, "delete")
         return res
     }
 
+    /**
+     *  Get all the reviews a user has liked
+     */
     static async getLikedReviews(userID) {
         let res = await this.request(`users/${userID}/likes`)
         return res
     }
 
+    /**
+     * Like a review
+     */
     static async likeReview(userID, reviewID) {
         let res = await this.request(`users/${userID}/likes`, {reviewID}, "post")
         return res
     }
 
+    /**
+     *  Remove a review from a users likes
+     */
     static async unlikeReview(userID, reviewID) {
         let res = await this.request(`users/${userID}/likes`, { reviewID }, "delete")
+        return res
+    }
+
+    /**
+     *  MOVIE METHODS
+     */
+
+    /**
+     *  SEARCH FOR MOVIES/TV
+     *  Takes multiple params, including:
+     *  s: this is your search term.
+     *  y: this is the year of release for the media you're searching for, if you have a specific one. Type: number
+     *  type: differentiate between media types. accepts three different string values ["movie", "series", "episode"]
+     *  page: number of page for result. type: number. If no argument is passed, defaults to one.
+     */
+    static async searchMovies(data) {
+        let res = await this.request(`movies/search`, data)
+        return res
+    }
+
+    /**
+     * Given a valid IMDB id, return all details about that media
+     */
+    static async getMovie(id) {
+        let res = await this.request(`movies/${id}`)
+        return res
+    }
+
+    /**
+     *  REVIEW METHODS
+     */
+
+    /**
+     *  Given it's ID, retrieve a single review 
+     */
+    static async getReview(id) {
+        let res = await this.request(`reviews/${id}`)
+        return res
+    }
+
+    /** Given a payload of data from a form,
+     *  create a review.
+     *  User must provide a valid jwt.
+     *  Data must look like this:
+     *  { movieID, userID, rating, title, body }
+     *  movieID must yield a valid movie/series from the API
+     *  userID must match the user on the JWT
+     *  rating minimum is 1, maximum is 10
+     *  title cannot exceed 100 characters
+     *  body cannot exceed 500 characters
+     */
+    static async postReview(data) {
+        let res = await this.request(`reviews/`, data, "post")
+        return res
+    }
+
+    /**
+     *  Given a payload of data, update a review
+     *  can be given { rating, title, body } to update,
+     *  all are technically optional
+     *  As with creation, user must pass a token to update a review, and that token must match the original poster of the review
+     * 
+     */
+
+    static async update(data, revID) {
+        let res = await this.request(`reviews/${revID}`, data, "patch")
+        return res
+    }
+
+    /* 
+    this also follows all the above rules, except deletes a review forever.
+    */
+    static async deleteReview(revID) {
+        let res = await this.request(`reviews/${revID}`, null, "delete")
         return res
     }
 }
