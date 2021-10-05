@@ -10,7 +10,7 @@ class CinemaApi {
         console.debug(`API Call: ${method} request sent to ${endpoint} \n Payload: ${data}`)
 
         const url = `${BASE_URL}/${endpoint}`
-        const headers = { Authorization: `Bearer ${CinemaApi.token}` } || {}
+        const headers = { Authorization: `Bearer ${CinemaApi.token}` } 
         const params = (method === "get") 
             ? data 
             : {}
@@ -223,5 +223,6 @@ class CinemaApi {
     }
 }
 
+CinemaApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJyYW5kX25ldyIsImlhdCI6MTYzMzM5NzA0OH0.5UWH3KTY3RQXdxiSpZoNaOUCr6Wj9hbECUybDXaCdig"
 
 export default CinemaApi

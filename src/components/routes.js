@@ -24,7 +24,7 @@ const Routes = () => {
                 <Route exact path="/media/search" >
                     <SearchPage />
                 </Route>
-                <Route path="/media/:id">
+                <Route path="/media/:imdbID">
                     <MediaPage />
                 </Route>
             </Switch> 
