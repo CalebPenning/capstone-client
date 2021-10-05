@@ -6,14 +6,17 @@ class CinemaApi {
     static token
 
     static async request(endpoint, data = {}, method = "get") {
-        console.log(`API Call: ${method} request sent to ${url} \n Payload: ${data}`)
+        console.log(BASE_URL)
+        console.debug(`API Call: ${method} request sent to ${endpoint} \n Payload: ${data}`)
 
         const url = `${BASE_URL}/${endpoint}`
-        const headers = { Authorization: `Bearer ${CinemaApi.token}` }
+        const headers = { Authorization: `Bearer ${CinemaApi.token}` } || {}
         const params = (method === "get") 
             ? data 
             : {}
         
+        console.debug(`PARAMS: ${params} \n DATA ${data}`)
+
         try {
             const result = await axios({ url, method, data, params, headers })
             return result.data
@@ -25,6 +28,7 @@ class CinemaApi {
             throw Array.isArray(message) ? message : [message]
         }
     }
+
 
     /**
      *  USER METHODS
@@ -155,7 +159,9 @@ class CinemaApi {
      *  page: number of page for result. type: number. If no argument is passed, defaults to one.
      */
     static async searchMovies(data) {
-        let res = await this.request(`movies/search`, data)
+        console.log(data)
+        let res = await axios.get(`${BASE_URL}/movies/search`,
+        {params: data})
         return res
     }
 
@@ -216,3 +222,6 @@ class CinemaApi {
         return res
     }
 }
+
+
+export default CinemaApi
