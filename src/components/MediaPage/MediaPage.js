@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import CinemaApi from "../../Api"
+import MediaReviews from "../MediaReviews/MediaReviews"
 
 const MediaPage = () => {
     const {imdbID} = useParams()
@@ -35,6 +36,8 @@ const MediaPage = () => {
             <pre>Starring: <b>{media.Actors}</b></pre>
             <h5>Plot Synopsis: </h5>
             <p>{media.Plot}</p>
+            <h3>Reviews:</h3>
+            <MediaReviews />
         </div>
     )
 }

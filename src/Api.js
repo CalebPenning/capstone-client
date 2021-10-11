@@ -185,6 +185,11 @@ class CinemaApi {
         return res
     }
 
+    static async getMediaReviews(imdbID) {
+        let res = await this.request(`movies/${imdbID}/reviews`)
+        return res
+    }
+
     /** Given a payload of data from a form,
      *  create a review.
      *  User must provide a valid jwt.

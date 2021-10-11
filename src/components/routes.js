@@ -2,6 +2,7 @@ import { Route, Switch, Redirect } from "react-router-dom"
 import Home from "./home/Home"
 import MediaPage from "./MediaPage/MediaPage"
 import SearchPage from "./SearchPage/SearchPage"
+import UserCard from "./userCard/UserCard"
 const Routes = () => {
     return (
         <>
@@ -26,6 +27,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/media/:imdbID">
                     <MediaPage />
+                </Route>
+                <Route path="/users/:id">
+                    <UserCard />
                 </Route>
             </Switch> 
         </>
