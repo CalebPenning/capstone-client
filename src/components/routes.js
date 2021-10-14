@@ -6,6 +6,7 @@ import UserCard from "./userCard/UserCard"
 import FollowingList from "./FollowingList/FollowingList"
 import FollowersList from "./FollowersList/FollowersList"
 import LikedList from "./LikedList/LikedList"
+import RegisterForm from "./RegisterForm/RegisterForm"
 
 const Routes = () => {
     return (
@@ -14,11 +15,11 @@ const Routes = () => {
                 <Route exact path="/" >
                     <Home />
                 </Route>
-                {/* <Route exact path="/login">
-                    <LoginForm />
-                </Route>
                 <Route exact path="/register">
                     <RegisterForm />
+                </Route>
+                {/* <Route exact path="/login">
+                    <LoginForm />
                 </Route>
                 <Route path="/users/:id" >
                     <UserProfile />

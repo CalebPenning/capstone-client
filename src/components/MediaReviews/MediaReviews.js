@@ -23,14 +23,19 @@ const MediaReviews = () => {
         </div>
     )
 
-    else return (
+    else if (reviews.length && !isLoading) return (
         reviews.map(el => (
             <div key={el.id}>
                 <h3>{el.reviewTitle}</h3>
                 <p>{el.body}</p>
                 <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></b></pre>
+
             </div>
         ))
+    )
+
+    else return (
+        <div>No user reviews for this media yet!</div>
     )
 }
 

@@ -63,6 +63,11 @@ class CinemaApi {
         return res
     }
 
+    static async getByUsername(username) {
+        let res = await this.request(`users/${username}`)
+        return res
+    }
+
     /**
      *  Allows a user to edit their own profile information
      *  Request must have a JWT on it and the JWT must match the user in the params
@@ -214,7 +219,7 @@ class CinemaApi {
      * 
      */
 
-    static async update(data, revID) {
+    static async updateReview(data, revID) {
         let res = await this.request(`reviews/${revID}`, data, "patch")
         return res
     }
@@ -228,6 +233,6 @@ class CinemaApi {
     }
 }
 
-CinemaApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJyYW5kX25ldyIsImlhdCI6MTYzMzM5NzA0OH0.5UWH3KTY3RQXdxiSpZoNaOUCr6Wj9hbECUybDXaCdig"
+CinemaApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJyYW5kX25ldyIsImlhdCI6MTYzNDE4MDM4OH0.M3IOtzaiF3EHTqIRTdCxG9Bw-ZaH7rWoNfb0-2f1d6A"
 
 export default CinemaApi
