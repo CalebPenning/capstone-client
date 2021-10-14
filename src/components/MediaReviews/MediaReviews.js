@@ -15,7 +15,7 @@ const MediaReviews = () => {
             setIsLoading(false)
         }
         getReviews(imdbID)
-    }, imdbID)
+    }, [imdbID])
 
     if (!reviews.length && isLoading) return (
         <div>
@@ -25,7 +25,7 @@ const MediaReviews = () => {
 
     else return (
         reviews.map(el => (
-            <div>
+            <div key={el.id}>
                 <h3>{el.reviewTitle}</h3>
                 <p>{el.body}</p>
                 <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></b></pre>

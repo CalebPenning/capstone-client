@@ -94,7 +94,7 @@ class CinemaApi {
      *  Get all users that are followed by a given user
      */
     static async getFollowedUsers(userID) {
-        let res = await this.request(`/users/${userID}/following`)
+        let res = await this.request(`users/${userID}/following`)
         return res
     }
 
@@ -102,7 +102,7 @@ class CinemaApi {
      *  Get all followers for a user
      */
     static async getFollowers(userID) {
-        let res = await this.request(`/users/${userID}/followers`)
+        let res = await this.request(`users/${userID}/followers`)
         return res
     }
 

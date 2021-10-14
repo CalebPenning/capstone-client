@@ -3,6 +3,10 @@ import Home from "./home/Home"
 import MediaPage from "./MediaPage/MediaPage"
 import SearchPage from "./SearchPage/SearchPage"
 import UserCard from "./userCard/UserCard"
+import FollowingList from "./FollowingList/FollowingList"
+import FollowersList from "./FollowersList/FollowersList"
+import LikedList from "./LikedList/LikedList"
+
 const Routes = () => {
     return (
         <>
@@ -27,6 +31,15 @@ const Routes = () => {
                 </Route>
                 <Route path="/media/:imdbID">
                     <MediaPage />
+                </Route>
+                <Route path="/users/:id/following">
+                    <FollowingList />
+                </Route>
+                <Route path="/users/:id/followers">
+                    <FollowersList />
+                </Route>
+                <Route path="/users/:id/likes">
+                    <LikedList />
                 </Route>
                 <Route path="/users/:id">
                     <UserCard />

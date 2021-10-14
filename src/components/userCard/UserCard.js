@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import CinemaApi from "../../Api"
 import UserReviews from "../UserReviews/UserReviews"
+import FollowingList from "../FollowingList/FollowingList"
 
 const UserCard = () => {
     const { id } = useParams()
@@ -30,6 +31,9 @@ const UserCard = () => {
             <div>
                 <UserReviews />
             </div>
+            <h6><NavLink to={`/users/${id}/following`}>Following</NavLink></h6>
+            <h6><NavLink to={`/users/${id}/followers`}>Followers</NavLink></h6>
+            <h6><NavLink to={`/users/${id}/likes`}>Likes</NavLink></h6>
         </div>
     )
 }
