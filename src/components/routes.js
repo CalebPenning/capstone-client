@@ -7,6 +7,7 @@ import FollowingList from "./FollowingList/FollowingList"
 import FollowersList from "./FollowersList/FollowersList"
 import LikedList from "./LikedList/LikedList"
 import RegisterForm from "./RegisterForm/RegisterForm"
+import LoginForm from "./LoginForm/LoginForm"
 
 const Routes = () => {
     return (
@@ -18,15 +19,15 @@ const Routes = () => {
                 <Route exact path="/register">
                     <RegisterForm />
                 </Route>
-                {/* <Route exact path="/login">
+                <Route exact path="/login">
                     <LoginForm />
                 </Route>
-                <Route path="/users/:id" >
-                    <UserProfile />
+                <Route exact path="logout">
+                    <Redirect to="/" />
                 </Route>
-                <Route path="/users/:id/reviews" >
+                {/* <Route path="/users/:id/reviews" >
                     <ReviewList />
-                </Route> */}
+                </Route>  */}
                 <Route exact path="/media/search" >
                     <SearchPage />
                 </Route>

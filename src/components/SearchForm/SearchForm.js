@@ -1,5 +1,5 @@
 import { useState } from "react"
-import CinemaAPI from "../../Api"
+import CinemaApi from "../../Api"
 import axios from "axios"
 
 const SearchForm = ({ setData }) => {
@@ -20,9 +20,9 @@ const SearchForm = ({ setData }) => {
     const handleSubmit = async e => {
         e.preventDefault()
         console.log(`THIS IS THE DATA BEING PASSED: ${searchData.s}`)
-        let results = await axios.get("http://localhost:3001/movies/search", { params: {s: searchData.s}})
-        console.log(results)
-        setData(results.data.Search)
+        let res = await CinemaApi.searchMovies(searchData)
+        console.log(res)
+        setData(res.data.Search)
     }
 
     return (

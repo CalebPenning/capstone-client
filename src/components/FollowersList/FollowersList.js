@@ -25,7 +25,7 @@ const FollowersList = () => {
     else return (
         <div>
             {followers.map(el => (
-                <div>
+                <div key={el.userID}>
                     <h3><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></h3>
                     <p><b>Bio: </b>{el.bio}</p>
                 </div>

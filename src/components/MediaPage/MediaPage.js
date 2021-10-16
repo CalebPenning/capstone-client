@@ -1,14 +1,27 @@
 import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
 import MediaReviews from "../MediaReviews/MediaReviews"
+import UserContext from "../UserContext"
+import ReviewForm from "../ReviewForm/ReviewForm"
 
 const MediaPage = () => {
     const {imdbID} = useParams()
+    const { currentUser, token } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [media, setMedia] = useState({})
+    const [reviewsVisible, setReviewsVisible] = useState(false)
+    const [showForm, setShowForm] = useState(false)
 
     console.debug(imdbID)
+
+    const toggleReviewVis = () => {
+        setReviewsVisible(!reviewsVisible)
+    }
+
+    const toggleFormVis = () => {
+        setShowForm(!showForm)
+    }
 
     useEffect(() => {
         const getMedia = async id => {
@@ -25,6 +38,8 @@ const MediaPage = () => {
         </div>
     )
 
+    if (showForm) return <ReviewForm media={media} />
+
     else return (
         <div>
             <h3>{media.Title} ({media.Year})</h3>
@@ -37,7 +52,9 @@ const MediaPage = () => {
             <h5>Plot Synopsis: </h5>
             <p>{media.Plot}</p>
             <h3>Reviews:</h3>
-            <MediaReviews />
+            {currentUser ? <button onClick={toggleFormVis}>Write A Review</button> : null}
+            <button onClick={toggleReviewVis}>{reviewsVisible ? "Hide reviews" : "Display Reviews"}</button>
+            {reviewsVisible ? <MediaReviews /> : <div></div>}
         </div>
     )
 }

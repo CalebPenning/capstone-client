@@ -16,7 +16,7 @@ const LikedList = () => {
             console.log(likedReviews)
             setIsLoading(false)
         }
-        getLikedReviews(id)
+        if (isLoading) getLikedReviews(id)
     }, [id])
 
     if (isLoading) return <div>Loading...</div>

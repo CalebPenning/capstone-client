@@ -15,7 +15,6 @@ const RegisterForm = () => {
     }
 
     const [formData, setFormData] = useState(initialState)
-    const [passComp, setPassComp] = useState()
     const [errs, setErrs] = useState([])
     
     if (token) return <Redirect to="/" />
@@ -35,22 +34,14 @@ const RegisterForm = () => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        for (let i in formData) {
-            console.log(formData[i])
-            if (!formData[i].length) setErrs(data => ([...data, `Field ${i} must be filled out`]))
-        }
         if (errs.length) {
             console.log(errs, "Something went wrong")
             return
         }
-        console.log("no errs on signup")
-        console.log(`Hello I am password2 ${document.querySelector("#password2").value}`)
-        setPassComp({password2: document.querySelector("#password2").value})
-        if (formData.password !== passComp.password2) return
-        console.log("no errs on pass comparison")
         let result = await CinemaApi.register(formData)
         console.log(result)
         if (result.success && localStorage.length === 0) {
+            console.log(`I am the register result ${result}`)
             setFormData(initialState)
             setToken(result.token)
         }

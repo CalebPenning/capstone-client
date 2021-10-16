@@ -3,8 +3,6 @@ import Routes from './components/routes'
 import { useState, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
-import SearchForm from './components/SearchForm/SearchForm'
-import MediaList from './components/MediaList/MediaList'
 import UserContext from './components/UserContext'
 import jwt from "jsonwebtoken"
 import CinemaApi from './Api'
@@ -13,22 +11,35 @@ const App = () => {
   const [data, setData] = useState([])
   const [token, setToken] = useState(localStorage.getItem("userJWT") || null)
   const [currentUser, setCurrentUser] = useState()
-  // console.log(`I AM TOKEN ${jwt.decode(token).username}`)
   
   useEffect(() => {
     const getCurrUser = async () => {
-      console.log(CinemaApi.token)
       CinemaApi.token = token
-      let res = await CinemaApi.getByUsername(jwt.decode(token).username)
+      console.log(CinemaApi.token)
+      console.log(jwt.decode(token))
+      let res = await CinemaApi.getProfile(+jwt.decode(token).userID)
+      console.log(`Get curr User res ${res}`)
       if (res.user) setCurrentUser(res.user)
     }
     if (token !== null) getCurrUser()
   }, [token])
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("userJWT", token)
+    } else {
+      localStorage.clear()
+      CinemaApi.token = null
+    }
+  }, [token])
+  console.log(`I AM API TOKEN ${jwt.decode(CinemaApi.token) || "no token"}`)
+  console.log(`I AM STATEFUL TOKEN ${jwt.decode(token) || "no token"}`)
+  console.log(currentUser)
+
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={ { data, setData, token, setToken, currentUser } }>
+        <UserContext.Provider value={ { data, setData, token, setToken, currentUser, setCurrentUser } }>
           <NavBar />
           <Routes />
         </UserContext.Provider>

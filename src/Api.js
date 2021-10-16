@@ -6,7 +6,6 @@ class CinemaApi {
     static token
 
     static async request(endpoint, data = {}, method = "get") {
-        console.log(BASE_URL)
         console.debug(`API Call: ${method} request sent to ${endpoint} \n Payload: ${data}`)
 
         const url = `${BASE_URL}/${endpoint}`
@@ -17,16 +16,16 @@ class CinemaApi {
         
         console.debug(`PARAMS: ${params} \n DATA ${data}`)
 
-        try {
+
             const result = await axios({ url, method, data, params, headers })
             return result.data
-        }
+        
 
-        catch(e) {
-            console.error(`API Error: ${e.response}`)
-            let message = e.response.data.error.message
-            throw Array.isArray(message) ? message : [message]
-        }
+        // catch(e) {
+        //     console.error(`API Error: ${e.response}`)
+        //     let message = e.response.data.error.message
+        //     throw Array.isArray(message) ? message : [message]
+        // }
     }
 
 
@@ -233,6 +232,8 @@ class CinemaApi {
     }
 }
 
-CinemaApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJyYW5kX25ldyIsImlhdCI6MTYzNDE4MDM4OH0.M3IOtzaiF3EHTqIRTdCxG9Bw-ZaH7rWoNfb0-2f1d6A"
+CinemaApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld25ldyIsInVzZXJJRCI6MTAsImlhdCI6MTYzNDMxNzA4NH0.sgI3OoHQkfl_rnjhdEZQkc-1Qosq8YhLTXsW7mMVzYY"
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJyYW5kX29sZCIsImlhdCI6MTYzNDMxNjc5N30.Lq2zbBJv2dM6HinzesNjfkU8HFIc1eF9KRh7hTg08W8"
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJyYW5kX25ldyIsImlhdCI6MTYzNDE4MDM4OH0.M3IOtzaiF3EHTqIRTdCxG9Bw-ZaH7rWoNfb0-2f1d6A"
 
 export default CinemaApi

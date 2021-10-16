@@ -22,7 +22,7 @@ const FollowingList = () => {
         <div>Loading...</div>
     )
 
-    if (!isLoading && !following.length) return <div>No one follows this user yet!</div>
+    if (!isLoading && !following.length) return <div>This user doesn't follow anyone yet!</div>
 
     else return (
         following.map(el => (
