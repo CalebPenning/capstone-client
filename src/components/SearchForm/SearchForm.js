@@ -1,13 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CinemaApi from "../../Api"
 import axios from "axios"
 
-const SearchForm = ({ setData }) => {
-    const [searchData, setSearchData] = useState({ s: "" })
-
+const SearchForm = ({ setData, page}) => {
+    const [searchData, setSearchData] = useState({
+        s: "",
+        page: +page
+    })
+    const [errs, setErrs] = useState([])
+    console.log(searchData)
     const handleChange = e => {
         try {
-            const { name, value } = e.target
+            let { name, value } = e.target
             setSearchData(data => ({
                 ...data,
                 [name]: value
@@ -21,13 +25,20 @@ const SearchForm = ({ setData }) => {
         e.preventDefault()
         console.log(`THIS IS THE DATA BEING PASSED: ${searchData.s}`)
         let res = await CinemaApi.searchMovies(searchData)
-        console.log(res)
+        console.log(`I am res ${res}`)
+        if (res.data.Error) {
+            console.log(res.data.Error)
+            setErrs([].push(res.data.Error))
+            return
+        }
         setData(res.data.Search)
     }
+
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <pre>{errs.length ? errs: null}</pre>
                 <label htmlFor="search-term">
                     Search Term
                 </label>

@@ -35,16 +35,18 @@ const MediaReviews = () => {
     )
 
     else if (reviews.length && !isLoading) return (
-        reviews.map(el => (
+        reviews.map(el => {
+            console.log(el)
+            return (
             <div key={el.reviewID}>
                 <h3>{el.reviewTitle}</h3>
                 <p>{el.body}</p>
                 <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></b></pre>
                 {currentUser.id === el.userID ? 
                 <button onClick={() => deleteReview(el.reviewID)}>Delete</button> : 
-                <LikeButton user={currentUser} reviewID={el.reviewID} setIsLoading={setIsLoading} />}
+                <LikeButton user={currentUser} reviewID={el.reviewID} />}
             </div>
-        ))
+        )})
     )
 
     else return (

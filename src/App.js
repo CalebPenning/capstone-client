@@ -7,6 +7,13 @@ import UserContext from './components/UserContext'
 import jwt from "jsonwebtoken"
 import CinemaApi from './Api'
 
+/**
+ *  TODO: 
+ *  add liked reviews, following users, followed user to currentUser obj for quick access
+ *  i.e. not using effect hooks to get collections all the time
+ *  
+ */
+
 const App = () => {
   const [data, setData] = useState([])
   const [token, setToken] = useState(localStorage.getItem("userJWT") || null)

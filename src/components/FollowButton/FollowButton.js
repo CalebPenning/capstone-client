@@ -3,11 +3,12 @@ import { Redirect } from "react-router"
 import CinemaApi from "../../Api"
 import UserContext from "../UserContext"
 import "./FollowButton.css"
+import jwt from "jsonwebtoken"
 
 const FollowButton = ({ userID }) => {
-    const { currentUser } = useContext(UserContext)
+    const { currentUser, token } = useContext(UserContext)
     const [following, setFollowing] = useState([])
-
+    
     useEffect(() => {
         const getFollowedUsers = async id => {
             let res = await CinemaApi.getFollowedUsers(id)
