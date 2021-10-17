@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import CinemaApi from "../../Api"
 import axios from "axios"
 
-const SearchForm = ({ setData, page}) => {
+const SearchForm = ({ setData, page }) => {
     const [searchData, setSearchData] = useState({
         s: "",
         page: +page

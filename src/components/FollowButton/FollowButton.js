@@ -5,30 +5,32 @@ import UserContext from "../UserContext"
 import "./FollowButton.css"
 import jwt from "jsonwebtoken"
 
-const FollowButton = ({ userID }) => {
-    const { currentUser, token } = useContext(UserContext)
+const FollowButton = ({ userID, currentUser }) => {
+    // const { currentUser, token } = useContext(UserContext)
     const [following, setFollowing] = useState([])
-    
+    const [hasUpdated, setHasUpdated] = useState(false)
+    console.log(`Here is the current user ${currentUser}`)
     useEffect(() => {
         const getFollowedUsers = async id => {
             let res = await CinemaApi.getFollowedUsers(id)
             console.log(res)
             if (res.following.length) setFollowing(res.following)
+            setHasUpdated(false)
         }
-        getFollowedUsers(currentUser.id)
-    }, [currentUser])
+        if (currentUser.id) getFollowedUsers(currentUser.id)
+    }, [currentUser, hasUpdated])
 
     const users = following.map(el => el.userID)
     console.log(users, following)
     const followUser = async () => {
         let res = await CinemaApi.followUser(currentUser.id, userID)
-        if (res.followed) return <Redirect to={`/users/${userID}`} />
+        if (res.followed) setHasUpdated(true)
         else console.log(res)
     }
 
     const unFollowUser = async () => {
         let res = await CinemaApi.unfollowUser(currentUser.id, userID)
-        if (res.unfollowed) return <Redirect to={`/users/${userID}`} />
+        if (res.unfollowed) setHasUpdated(true)
         else console.log(res)
     }
 

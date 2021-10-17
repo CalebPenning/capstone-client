@@ -14,7 +14,7 @@ const SearchPage = () => {
     }
 
     const decrementPage = () => {
-        setPage(page - 1 >= 1 ? page - 1 : 1)
+        setPage(page - 1 > 1 ? page - 1 : 1)
     }
 
     console.log(jwt.decode(CinemaApi.token))

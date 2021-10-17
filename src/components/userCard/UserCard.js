@@ -1,12 +1,14 @@
 import { NavLink, useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
 import UserReviews from "../UserReviews/UserReviews"
 import FollowingList from "../FollowingList/FollowingList"
 import FollowButton from "../FollowButton/FollowButton"
+import UserContext from "../UserContext"
 
 const UserCard = () => {
     const { id } = useParams()
+    const { currentUser } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState({})
     useEffect(() => {
@@ -26,7 +28,7 @@ const UserCard = () => {
     else return (
         <div>
             <h3>{user.username}'s Profile</h3>
-            <FollowButton userID={id} />
+            <FollowButton userID={id} currentUser={currentUser ? currentUser : {}} />
             <h4>Bio: </h4>
             <p>{user.bio}</p>
             <h5>Reviews: </h5>
