@@ -17,7 +17,7 @@ const LikedList = () => {
             setIsLoading(false)
         }
         if (isLoading) getLikedReviews(id)
-    }, [id])
+    }, [id, isLoading, likedReviews])
 
     if (isLoading) return <div>Loading...</div>
     else if (!isLoading && likedReviews.length > 0) {

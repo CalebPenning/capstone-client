@@ -7,7 +7,7 @@ import ReviewForm from "../ReviewForm/ReviewForm"
 
 const MediaPage = () => {
     const {imdbID} = useParams()
-    const { currentUser, token } = useContext(UserContext)
+    const { currentUser } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [media, setMedia] = useState({})
     const [reviewsVisible, setReviewsVisible] = useState(false)

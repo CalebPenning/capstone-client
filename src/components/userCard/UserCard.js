@@ -2,7 +2,6 @@ import { NavLink, useParams } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
 import UserReviews from "../UserReviews/UserReviews"
-import FollowingList from "../FollowingList/FollowingList"
 import FollowButton from "../FollowButton/FollowButton"
 import UserContext from "../UserContext"
 

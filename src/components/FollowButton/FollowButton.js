@@ -1,12 +1,8 @@
-import { useState, useEffect, useContext } from "react"
-import { Redirect } from "react-router"
+import { useState, useEffect } from "react"
 import CinemaApi from "../../Api"
-import UserContext from "../UserContext"
 import "./FollowButton.css"
-import jwt from "jsonwebtoken"
 
 const FollowButton = ({ userID, currentUser }) => {
-    // const { currentUser, token } = useContext(UserContext)
     const [following, setFollowing] = useState([])
     const [hasUpdated, setHasUpdated] = useState(false)
     console.log(`Here is the current user ${currentUser}`)

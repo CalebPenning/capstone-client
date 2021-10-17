@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import CinemaApi from "../../Api"
-import axios from "axios"
 
 const SearchForm = ({ setData, page }) => {
     const [searchData, setSearchData] = useState({
