@@ -27,7 +27,7 @@ const SearchForm = ({ setData, page }) => {
         console.log(`I am res ${res}`)
         if (res.data.Error) {
             console.log(res.data.Error)
-            setErrs([].push(res.data.Error))
+            setErrs([errs].push(res.data.Error))
             return
         }
         setData(res.data.Search)

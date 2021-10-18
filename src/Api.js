@@ -151,6 +151,17 @@ class CinemaApi {
     }
 
     /**
+     * 
+     * Given a logged in user's ID, 
+     * get posts for their homepage
+     */
+
+    static async getHomepagePosts(userID) {
+        let res = await this.request(`users/${userID}/following/posts`)
+        return res
+    }
+
+    /**
      *  MOVIE METHODS
      */
 

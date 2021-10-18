@@ -40,6 +40,7 @@ const MediaReviews = () => {
             return (
             <div key={el.reviewID}>
                 <h3>{el.reviewTitle}</h3>
+                <h4>Rating: {el.rating}</h4>
                 <p>{el.body}</p>
                 <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></b></pre>
                 {currentUser.id === el.userID ? 
