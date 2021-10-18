@@ -13,14 +13,48 @@ const NavBar = () => {
     }
 
     if (currentUser) return (
-    <div>
-        <nav>
-            <NavLink exact to="/">Cinema</NavLink>
-            <NavLink exact to="/media/search">Search</NavLink>
-            <NavLink exact to={`/users/${currentUser.id}`}>My Profile</NavLink>
-            <NavLink onClick={logout} to="/logout">Logout</NavLink>
-        </nav>
-    </div>)
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+            <NavLink className="navbar-brand" exact to="/"><b>Cinema</b></NavLink>
+            <button 
+                class="navbar-toggler" type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span className="navbar-toggler-icon" />
+            </button>
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav ms-auto mb-4 mb-md-0">
+                    <li class="nav-item">
+                        <NavLink 
+                        exact to="/media/search"
+                        className="nav-link"
+                        >Search</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink
+                        exact to={`/users/${currentUser.id}`}
+                        className="nav-link">
+                            My Profile
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink
+                        to="/logout"
+                        onClick={logout}
+                        className="nav-link"
+                        >
+                            Logout
+                        </NavLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>)
 
     else return (
         <div>
@@ -32,5 +66,10 @@ const NavBar = () => {
         </div>
     )
 }
+
+                {/* <NavLink exact to="/media/search">Search</NavLink>
+                <NavLink exact to={`/users/${currentUser.id}`}>My Profile</NavLink>
+                <NavLink onClick={logout} to="/logout">Logout</NavLink>
+                 */}
 
 export default NavBar

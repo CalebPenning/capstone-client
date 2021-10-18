@@ -1,4 +1,5 @@
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
 import Routes from './components/routes'
 import { useState, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'

@@ -20,7 +20,7 @@ const HomeFeed = () => {
             setIsLoading(false)
         }
         if (isLoading && currentUser) getHomepage(currentUser.id)
-    }, [isLoading])
+    }, [isLoading, currentUser])
 
     if (isLoading) return <div>Loading...</div>
 
@@ -32,6 +32,7 @@ const HomeFeed = () => {
             posts.map(el => (
                 <div key={el.reviewID}>
                     <h3>{el.reviewTitle}</h3>
+                <p>Review for <b><NavLink to={`/media/${el.movieID}`}>{el.movieTitle}</NavLink></b></p>
                     <h4>Rating: {el.rating}</h4>
                     <p>{el.body}</p>
                     <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.postedBy}</NavLink></b></pre>
