@@ -1,10 +1,9 @@
 import { useState } from "react"
 import CinemaApi from "../../Api"
 
-const SearchForm = ({ setData, page }) => {
+const SearchForm = ({ setData }) => {
     const [searchData, setSearchData] = useState({
-        s: "",
-        page: +page
+        s: ""
     })
     const [errs, setErrs] = useState([])
     console.log(searchData)
@@ -36,13 +35,18 @@ const SearchForm = ({ setData, page }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <pre>{errs.length ? errs: null}</pre>
-                <label htmlFor="search-term">
-                    Search Term
-                </label>
-                <input type="text" name="s" id="search-term" onChange={handleChange} />
-                <button type="submit">Search</button>
+            {/* { errs ? errs.map(e => <p>{e}</p>) : null} */}
+            <form onSubmit={handleSubmit} className="container">
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="search-term">
+                        Search Term
+                    </label>
+                    <input type="text" 
+                    name="s" id="search-term" 
+                    onChange={handleChange}
+                    className="form-control" />
+                </div>    
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
     )

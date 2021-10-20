@@ -41,7 +41,7 @@ const MediaPage = () => {
     if (showForm) return <ReviewForm media={media} />
 
     else return (
-        <div>
+        <div className="container">
             <h3>{media.Title} ({media.Year})</h3>
             <img src={media.Poster} alt={`A poster for the ${media.Type}, ${media.Title}`} />
             <pre>Genre&#40;s&#41;: {media.Genre}</pre>
