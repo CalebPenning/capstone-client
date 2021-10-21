@@ -67,9 +67,9 @@ const NavBar = () => {
     )
 }
 
-                {/* <NavLink exact to="/media/search">Search</NavLink>
+                /* <NavLink exact to="/media/search">Search</NavLink>
                 <NavLink exact to={`/users/${currentUser.id}`}>My Profile</NavLink>
                 <NavLink onClick={logout} to="/logout">Logout</NavLink>
-                 */}
+                 */
 
 export default NavBar

@@ -16,7 +16,7 @@ import CinemaApi from './Api'
  */
 
 const App = () => {
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   const [token, setToken] = useState(localStorage.getItem("userJWT") || null)
   const [currentUser, setCurrentUser] = useState()
   
@@ -47,7 +47,7 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={ { data, setData, token, setToken, currentUser, setCurrentUser } }>
+        <UserContext.Provider value={ {  token, setToken, currentUser, setCurrentUser } }>
           <NavBar />
           <Routes />
         </UserContext.Provider>

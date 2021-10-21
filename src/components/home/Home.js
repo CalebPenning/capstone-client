@@ -5,11 +5,18 @@ import { useContext } from "react"
 const Home = () => {
     const { currentUser } = useContext(UserContext)
     if (currentUser) return (
-        <>
-            <h2>Hello there, {currentUser.username}!</h2>
-            <h3>Here's the latest posts from people you follow:</h3>
-            <HomeFeed />
-        </>
+        <div>
+            <div className="p-5 mb-4 bg-light rounded-3">
+                <div className="container-fluid py-5 bg-light text-center">
+                    <pre className="display-6">Hello {currentUser.username}!</pre>
+                    <h5 className="display-5 fw-bold">Here's the latest posts from people you follow:</h5>
+                    
+                </div>
+            </div>
+            <div className="container">
+                <HomeFeed />
+            </div>
+        </div>
         )
     else return (
         <div>

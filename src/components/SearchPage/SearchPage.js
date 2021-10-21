@@ -1,12 +1,11 @@
 import SearchForm from "../SearchForm/SearchForm"
 import MediaList from "../MediaList/MediaList"
-import UserContext from "../UserContext"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import CinemaApi from "../../Api"
 import jwt from "jsonwebtoken"
 
 const SearchPage = () => {
-    const { data, setData } = useContext(UserContext)
+    const [data, setData] = useState([])
 
     console.log(jwt.decode(CinemaApi.token))
     return (

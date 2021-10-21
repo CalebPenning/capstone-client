@@ -25,12 +25,12 @@ const HomeFeed = () => {
     if (isLoading) return <div>Loading...</div>
 
     else return (
-        <div>
+        <div className="row">
             { 
             message ?
             message :
             posts.map(el => (
-                <div key={el.reviewID}>
+                <div key={el.reviewID} className="col-sm-6">
                     <h3>{el.reviewTitle}</h3>
                 <p>Review for <b><NavLink to={`/media/${el.movieID}`}>{el.movieTitle}</NavLink></b></p>
                     <h4>Rating: {el.rating}</h4>
