@@ -12,7 +12,9 @@ const SearchPage = () => {
             setTimeout(() => setError(""), 3000)
         }
         if (error) errCleanUp()
-    }, [error]) 
+    }, [error])
+
+    console.log(error)
     return (
         <>
             {error.length ? <div className="text-center alert alert-danger">{error}</div> : null}

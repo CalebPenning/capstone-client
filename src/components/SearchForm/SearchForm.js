@@ -27,11 +27,12 @@ const SearchForm = ({ setData, setError }) => {
             }
             console.log(`THIS IS THE DATA BEING PASSED: ${searchData.s}`)
             let res = await CinemaApi.searchMovies(searchData)
-            console.dir(JSON.stringify(res))
-            setData(res.data.Search)
+            console.log(res)
+            if (res.data.Response === "False") setError(res.data.Error)
+            else setData(res.data.Search)
         } catch(e) {
-            // console.log(e)
-            setError(e)
+            console.log(e)
+            // setError(e)
         }
     }
 

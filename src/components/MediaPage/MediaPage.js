@@ -54,10 +54,13 @@ const MediaPage = () => {
                     <h5>Plot Synopsis: </h5>
                     <p>{media.Plot}</p>
                 </div>
-                <h3>Reviews:</h3>
+                { reviewsVisible ? <h3>Reviews:</h3> : null}
                 { showForm ? <ReviewForm media={media} /> : null }
-                { reviewsVisible ? <MediaReviews /> : null }
-                {currentUser ? <button className="btn btn-sm btn-secondary mb-3" onClick={toggleFormVis}>Write A Review</button> : null}
+                { reviewsVisible ? 
+                    <div className="row">
+                        <MediaReviews />
+                    </div> : null }
+                {currentUser ? <button className="btn btn-sm btn-secondary mb-3" onClick={toggleFormVis}>{ showForm ? "Go Back" : "Write A Review" }</button> : null}
                 <button className="btn btn-sm btn-primary mb-3" onClick={toggleReviewVis}>{reviewsVisible ? "Hide reviews" : "Display Reviews"}</button>
             </div>
         </div>

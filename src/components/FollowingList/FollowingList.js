@@ -19,14 +19,14 @@ const FollowingList = () => {
     }, [id])
 
     if (isLoading) return (
-        <div>Loading...</div>
+        <div className="text-center">Loading...</div>
     )
 
     if (!isLoading && !following.length) return <div>This user doesn't follow anyone yet!</div>
 
     else return (
         following.map(el => (
-            <div key={el.userID}>
+            <div className="text-center" key={el.userID}>
                 <h3><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></h3>
                 <p><b>Bio: </b>{el.bio}</p>
             </div>

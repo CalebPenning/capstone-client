@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
+import ReviewCard from "../ReviewCard/ReviewCard"
+import UserContext from "../UserContext"
 
 const LikedList = () => {
     const { id } = useParams()
+    const { currentUser } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [likedReviews, setLikedReviews] = useState([])
 
@@ -22,14 +24,12 @@ const LikedList = () => {
     if (isLoading) return <div>Loading...</div>
     else if (!isLoading && likedReviews.length > 0) {
         return (
-            likedReviews.map(el => (
-                <div key={el.id}>
-                    <h3>{el.reviewTitle}</h3>
-                    <pre>Review for {el.movieTitle}</pre>
-                    <p>{el.body}</p>
-                    <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.postedBy}</NavLink></b></pre>
-                </div>
-            ))
+            <div className="row">
+                <h3></h3>
+                {likedReviews.map(el => (
+                    <ReviewCard review={el} currentUser={currentUser} isLoading={isLoading} setIsLoading={setIsLoading} />
+                ))}
+            </div>
         )
     }
 

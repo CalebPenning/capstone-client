@@ -23,7 +23,7 @@ const FollowersList = () => {
     if (!isLoading && !followers.length) return <div>No one follows this user yet!</div>
 
     else return (
-        <div>
+        <div className="container text-center"> 
             {followers.map(el => (
                 <div key={el.userID}>
                     <h3><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></h3>

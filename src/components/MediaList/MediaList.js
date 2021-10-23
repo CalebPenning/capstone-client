@@ -1,6 +1,6 @@
 import MovieCard from "../MovieCard/MovieCard"
 
-const MediaList = ({data}) => (
+const MediaList = ({ data=[] }) => (
     <div className="container">
         <div className="row">
         {data.map(item => (

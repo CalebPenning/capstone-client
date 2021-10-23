@@ -5,3 +5,7 @@ body {
 .heart {
   cursor: pointer;
 }
+
+.delete-button {
+  cursor: pointer;
+}

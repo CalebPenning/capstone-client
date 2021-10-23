@@ -1,4 +1,6 @@
 import CinemaApi from "../../Api"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
 const DeleteButton = ({ currentUser=null, review, isLoading=null, setIsLoading=null }) => {
     
@@ -12,7 +14,7 @@ const DeleteButton = ({ currentUser=null, review, isLoading=null, setIsLoading=n
     if (isLoading) return <button className="btn btn-danger"><i className="fas fa-spinner"></i></button>
 
     else if (review.userID === currentUser.id && !isLoading) return (
-        <button className="btn btn-sm btn-danger mb-3" onClick={() => deleteReview(review.reviewID)}>Delete</button>
+        <FontAwesomeIcon icon={faTrash} className="delete-button" onClick={() => deleteReview(review.reviewID)} />
     )
 
     if (!currentUser) return null

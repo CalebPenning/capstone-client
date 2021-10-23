@@ -1,10 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
-import { NavLink } from "react-router-dom"
 import CinemaApi from "../../Api"
 import UserContext from "../UserContext"
-import LikeButton from "../LikeButton/LikeButton"
-import DeleteButton from "../DeleteButton/DeleteButton"
+import ReviewCard from "../ReviewCard/ReviewCard"
 
 const MediaReviews = () => {
     const { imdbID } = useParams()
@@ -21,8 +19,6 @@ const MediaReviews = () => {
         if (isLoading) getReviews(imdbID)
     }, [imdbID, isLoading])
 
-    // if review is by a user, add delete button, otherwise, add a like/dislike button
-
     if (!reviews.length && isLoading) return (
         <div>
             Loading...
@@ -30,19 +26,9 @@ const MediaReviews = () => {
     )
 
     else if (reviews.length && !isLoading) return (
-        reviews.map(el => {
-            console.log(el)
-            return (
-            <div key={el.reviewID}>
-                <h3>{el.reviewTitle}</h3>
-                <h4>Rating: {el.rating}</h4>
-                <p>{el.body}</p>
-                <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></b></pre>
-                {currentUser.id === el.userID ? 
-                <DeleteButton currentUser={currentUser} review={el} isLoading={isLoading} setIsLoading={setIsLoading} /> : 
-                <LikeButton user={currentUser} reviewID={el.reviewID} />}
-            </div>
-        )})
+        reviews.map(el => (
+                <ReviewCard review={el} currentUser={currentUser} isLoading={isLoading} setIsLoading={setIsLoading} />
+        ))
     )
 
     else return (

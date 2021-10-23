@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import CinemaApi from "../../Api"
-import "./FollowButton.css"
 
 const FollowButton = ({ userID, currentUser }) => {
     const [following, setFollowing] = useState([])
@@ -34,10 +33,10 @@ const FollowButton = ({ userID, currentUser }) => {
     if (+currentUser.id === +userID) return <></>
     console.log(`HERES THE CURRENT USER ID ${currentUser.id} HERES THE PASSED ID ${userID}`)
     if (users.includes(+userID)) return (
-        <button className="following" onClick={unFollowUser}>Following</button>
+        <button className="following btn-sm btn-primary" onClick={unFollowUser}>Following</button>
     )
     else return (
-        <button onClick={followUser}>Follow</button>
+        <button className="btn-sm btn-success" onClick={followUser}>Follow</button>
     )
 }
 
