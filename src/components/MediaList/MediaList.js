@@ -4,7 +4,7 @@ const MediaList = ({data}) => (
     <div className="container">
         <div className="row">
         {data.map(item => (
-            <MovieCard item={item} />
+            <MovieCard item={item} key={item.imdbID} />
         ))}
         </div>
     </div>

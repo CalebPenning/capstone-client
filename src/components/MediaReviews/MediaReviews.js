@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import CinemaApi from "../../Api"
 import UserContext from "../UserContext"
 import LikeButton from "../LikeButton/LikeButton"
+import DeleteButton from "../DeleteButton/DeleteButton"
 
 const MediaReviews = () => {
     const { imdbID } = useParams()
@@ -19,12 +20,6 @@ const MediaReviews = () => {
         }
         if (isLoading) getReviews(imdbID)
     }, [imdbID, isLoading])
-
-    const deleteReview = async id => {
-        let res = await CinemaApi.deleteReview(id)
-        console.log(res)
-        setIsLoading(true)
-    }
 
     // if review is by a user, add delete button, otherwise, add a like/dislike button
 
@@ -44,7 +39,7 @@ const MediaReviews = () => {
                 <p>{el.body}</p>
                 <pre>Posted on {el.createdAt} by user <b><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></b></pre>
                 {currentUser.id === el.userID ? 
-                <button onClick={() => deleteReview(el.reviewID)}>Delete</button> : 
+                <DeleteButton currentUser={currentUser} review={el} isLoading={isLoading} setIsLoading={setIsLoading} /> : 
                 <LikeButton user={currentUser} reviewID={el.reviewID} />}
             </div>
         )})

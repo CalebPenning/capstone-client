@@ -25,13 +25,13 @@ const UserCard = () => {
     )
 
     else return (
-        <div>
+        <div className="container">
             <h3>{user.username}'s Profile</h3>
             <FollowButton userID={id} currentUser={currentUser ? currentUser : {}} />
             <h4>Bio: </h4>
             <p>{user.bio}</p>
             <h5>Reviews: </h5>
-            <div>
+            <div className="row">
                 <UserReviews />
             </div>
             <h6><NavLink to={`/users/${id}/following`}>Following</NavLink></h6>

@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
+import ReviewCard from "../ReviewCard/ReviewCard"
+import UserContext from "../UserContext"
 
 const UserReviews = () => {
     const { id } = useParams()
+    const { currentUser } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [reviews, setReviews] = useState([])
 
@@ -16,7 +18,7 @@ const UserReviews = () => {
             setIsLoading(false)
         }
         getReviews(id)
-    }, [id])
+    }, [id, isLoading])
 
     if (isLoading) return (
         <div>Loading...</div>
@@ -24,12 +26,7 @@ const UserReviews = () => {
 
     else return (
         reviews.map(el => (
-            <div>
-                <h3>{el.reviewTitle}</h3>
-                <pre>Review for <NavLink to={`/media/${el.movieID}`}>{el.movieTitle}</NavLink></pre>
-                <p>{el.body}</p>
-                <pre></pre>
-            </div>
+            <ReviewCard review={el} currentUser={currentUser || null} isLoading={isLoading} setIsLoading={setIsLoading}  />
         ))
     )
 }

@@ -45,19 +45,28 @@ const ReviewForm = ({ media}) => {
 
     if (hasPosted) return <Redirect to={`/users/${userID}`} />
     else return (
-        <div>
-            <h3>Write a review for {media.Title}</h3>
+        <div className="mb-3 review-form">
+            <h3 className="mb-3">Write a review for {media.Title}</h3>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title</label>
-                <input type="text" name="title" id="title" maxLength={100} onChange={handleChange} />
-
-                <label htmlFor="rating">Rating</label>
-                <input type="number" name="rating" id="rating" min={1} max={10} defaultValue={1} onChange={handleChange} />
-
-                <label htmlFor="body">Body</label>
-                <textarea maxLength={500} name="body" id="body" rows={5} cols={33} onChange={handleChange} />
-            
-                <button>Submit</button>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="title">Title</label>
+                    <input type="text" 
+                    name="title" 
+                    id="title" 
+                    maxLength={100} 
+                    onChange={handleChange}
+                    className="form-control form-control-sm"
+                    />
+                </div>
+                <div className="mb-5 w-25 mx-auto">
+                    <label className="form-label" htmlFor="rating">Rating</label>
+                    <input type="number" className="form-control" name="rating" id="rating" min={1} max={10} defaultValue={1} onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="body">Body</label>
+                    <textarea className="form-control" maxLength={500} name="body" id="body" rows={5} cols={33} onChange={handleChange} />
+                </div>         
+                <button className="btn btn-sm btn-dark">Submit</button>
             </form>
         </div>
     )

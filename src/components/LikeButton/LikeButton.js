@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import CinemaApi from "../../Api"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import "./LikeButton.css"
 
 const LikeButton = ({ user, reviewID }) => {
@@ -34,11 +36,12 @@ const LikeButton = ({ user, reviewID }) => {
     if (isLoading) return <div>Loading...</div>
 
     if (!isLoading && likedReviews.includes(reviewID)) return (
-        <button className="liked" onClick={unlikeReview}>Unlike</button>
-    )
+        // <button className="btn btn-danger" onClick={unlikeReview}>Unlike</button>
+        <FontAwesomeIcon icon={faHeart} color="red" className="heart" onClick={unlikeReview} />
+    ) 
 
     else if (!isLoading && !likedReviews.includes(reviewID)) return (
-        <button onClick={likeReview}>Like</button>
+        <FontAwesomeIcon icon={faHeart} className="heart" color="grey" onClick={likeReview} />
     )
 }
 

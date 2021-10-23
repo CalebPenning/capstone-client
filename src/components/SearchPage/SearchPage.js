@@ -1,16 +1,22 @@
 import SearchForm from "../SearchForm/SearchForm"
 import MediaList from "../MediaList/MediaList"
-import { useState } from "react"
-import CinemaApi from "../../Api"
-import jwt from "jsonwebtoken"
+import { useState, useEffect } from "react"
+
 
 const SearchPage = () => {
     const [data, setData] = useState([])
+    const [error, setError] = useState("")
 
-    console.log(jwt.decode(CinemaApi.token))
+    useEffect(() => {
+        const errCleanUp = () => {
+            setTimeout(() => setError(""), 3000)
+        }
+        if (error) errCleanUp()
+    }, [error]) 
     return (
         <>
-            <SearchForm setData={setData}/>
+            {error.length ? <div className="text-center alert alert-danger">{error}</div> : null}
+            <SearchForm setData={setData} setError={setError}/>
             <MediaList data={data} />
         </>
     )

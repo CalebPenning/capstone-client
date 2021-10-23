@@ -17,7 +17,7 @@ const NavBar = () => {
         <div className="container-fluid">
             <NavLink className="navbar-brand" exact to="/"><b>Cinema</b></NavLink>
             <button 
-                class="navbar-toggler" type="button" 
+                className="navbar-toggler" type="button" 
                 data-bs-toggle="collapse" 
                 data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
@@ -29,7 +29,7 @@ const NavBar = () => {
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-4 mb-md-0">
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <NavLink 
                         exact to="/media/search"
                         className="nav-link"

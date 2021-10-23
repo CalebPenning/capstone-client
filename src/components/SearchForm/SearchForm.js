@@ -1,41 +1,42 @@
 import { useState } from "react"
 import CinemaApi from "../../Api"
 
-const SearchForm = ({ setData }) => {
+const SearchForm = ({ setData, setError }) => {
     const [searchData, setSearchData] = useState({
         s: ""
     })
-    const [errs, setErrs] = useState([])
-    console.log(searchData)
+
     const handleChange = e => {
         try {
             let { name, value } = e.target
             setSearchData(data => ({
                 ...data,
-                [name]: value
+                [name]: value.trim()
             }))
-        } catch(err) {
-            console.log(err)
+        } catch(e) {
+            console.log(e)
         }
     }
 
     const handleSubmit = async e => {
-        e.preventDefault()
-        console.log(`THIS IS THE DATA BEING PASSED: ${searchData.s}`)
-        let res = await CinemaApi.searchMovies(searchData)
-        console.log(`I am res ${res}`)
-        if (res.data.Error) {
-            console.log(res.data.Error)
-            setErrs([errs].push(res.data.Error))
-            return
+        try {
+            e.preventDefault()
+            if (searchData.s.trim().length < 3) {
+                setError(`You must pass at least 3 non-whitespace characters`)    
+                return
+            }
+            console.log(`THIS IS THE DATA BEING PASSED: ${searchData.s}`)
+            let res = await CinemaApi.searchMovies(searchData)
+            console.dir(JSON.stringify(res))
+            setData(res.data.Search)
+        } catch(e) {
+            // console.log(e)
+            setError(e)
         }
-        setData(res.data.Search)
     }
 
-
     return (
-        <div>
-            {/* { errs ? errs.map(e => <p>{e}</p>) : null} */}
+        <div className="container text-center">
             <form onSubmit={handleSubmit} className="container">
                 <div className="mb-3">
                     <label className="form-label" htmlFor="search-term">
@@ -44,7 +45,10 @@ const SearchForm = ({ setData }) => {
                     <input type="text" 
                     name="s" id="search-term" 
                     onChange={handleChange}
-                    className="form-control" />
+                    minLength={3} maxLength={30}
+                    className="form-control"
+                    // value={searchData.s}
+                    required />
                 </div>    
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>

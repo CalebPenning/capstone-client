@@ -38,23 +38,28 @@ const MediaPage = () => {
         </div>
     )
 
-    if (showForm) return <ReviewForm media={media} />
+    // if (showForm) return <ReviewForm media={media} />
 
     else return (
-        <div className="container">
-            <h3>{media.Title} ({media.Year})</h3>
-            <img src={media.Poster} alt={`A poster for the ${media.Type}, ${media.Title}`} />
-            <pre>Genre&#40;s&#41;: {media.Genre}</pre>
-            <pre>Rated: <b>{media.Rated}</b></pre>
-            <pre>Directed by: <b>{media.Director}</b></pre>
-            <pre>Written by: <b>{media.Writer}</b></pre>
-            <pre>Starring: <b>{media.Actors}</b></pre>
-            <h5>Plot Synopsis: </h5>
-            <p>{media.Plot}</p>
-            <h3>Reviews:</h3>
-            {currentUser ? <button onClick={toggleFormVis}>Write A Review</button> : null}
-            <button onClick={toggleReviewVis}>{reviewsVisible ? "Hide reviews" : "Display Reviews"}</button>
-            {reviewsVisible ? <MediaReviews /> : <div></div>}
+        <div className="p-5 mb-4 bg-light rounded-3">
+            <div className="container-fluid py-5 bg-light text-center w-75 mx-auto" >
+                <h3 className="display-4">{media.Title} ({media.Year})</h3>
+                <img src={media.Poster} alt={`A poster for the ${media.Type}, ${media.Title}`} />
+                <p>Genre&#40;s&#41;: <b>{media.Genre}</b></p>
+                <p>Rated: <b>{media.Rated}</b></p>
+                <p>Directed by: <b>{media.Director}</b></p>
+                <pre>Written by: <b>{media.Writer}</b></pre>
+                <pre>Starring: <b>{media.Actors}</b></pre>
+                <div className="mb-3 w-75 mx-auto">
+                    <h5>Plot Synopsis: </h5>
+                    <p>{media.Plot}</p>
+                </div>
+                <h3>Reviews:</h3>
+                { showForm ? <ReviewForm media={media} /> : null }
+                { reviewsVisible ? <MediaReviews /> : null }
+                {currentUser ? <button className="btn btn-sm btn-secondary mb-3" onClick={toggleFormVis}>Write A Review</button> : null}
+                <button className="btn btn-sm btn-primary mb-3" onClick={toggleReviewVis}>{reviewsVisible ? "Hide reviews" : "Display Reviews"}</button>
+            </div>
         </div>
     )
 }
