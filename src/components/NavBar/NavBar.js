@@ -57,13 +57,33 @@ const NavBar = () => {
     </nav>)
 
     else return (
-        <div>
-            <nav>
-                <NavLink exact to="/">Cinema</NavLink>
-                <NavLink exact to="/login">Login</NavLink>
-                <NavLink exact to="/register">Register</NavLink>
-            </nav>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <NavLink className="navbar-brand" exact to="/"><b>Cinema</b></NavLink>
+                
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle Navigation"
+                >
+                    <span className="navbar-toggler-icon" />
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav ms-auto mb-4 mb-md-0">
+                        <li className="nav-item">
+                            <NavLink className="nav-link" exact to="/login">Login</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" exact to="/register">Register</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     )
 }
 

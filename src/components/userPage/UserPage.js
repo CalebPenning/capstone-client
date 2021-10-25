@@ -25,7 +25,7 @@ const UserCard = () => {
     )
 
     else return (
-        <div className="container text-center">
+        <div className="mb-3 p-5 bg-light text-center">
             <h3>{user.username}'s Profile</h3>
             <FollowButton userID={id} currentUser={currentUser ? currentUser : {}} />
             <h4>Bio: </h4>

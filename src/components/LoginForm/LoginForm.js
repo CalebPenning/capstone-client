@@ -1,6 +1,6 @@
 import UserContext from "../UserContext"
 import CinemaApi from "../../Api"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 
 const LoginForm = () => {
@@ -11,7 +11,14 @@ const LoginForm = () => {
     }
 
     const [formData, setFormData] = useState(initialState)
-    const [errs, setErrs] = useState([])
+    const [errs, setErrs] = useState("")
+
+    useEffect(() => {
+        const errCleanUp = () => {
+            setTimeout(() => setErrs(""), 3000)
+        }
+        if (errs.length) errCleanUp()
+    }, [errs])
 
     const handleChange = e => {
         try {
@@ -31,31 +38,39 @@ const LoginForm = () => {
         e.preventDefault()
 
         if (!formData.password || !formData.username) {
-            setErrs(data => [...data, `You must fill out all fields`])
+            setErrs(`You must fill out all fields`)
         }
 
-        let result = await CinemaApi.login(formData)
-        console.log(`login result ${result}`)
-
-        if (result.success && localStorage.length === 0) {
-            setFormData(initialState)
-            setToken(result.token)
+        try {
+            let result = await CinemaApi.login(formData)
+            if (result.success) {
+                setFormData(initialState)
+                setToken(result.token)
+            }
         }
-        else console.log(result)
+
+        catch(err) {
+            console.log(err)
+            setErrs(err.response.data.error.message)
+        }
     }
 
     if (token) return <Redirect to="/" />
 
     else return (
-        <div>
+        <div className="mb-3 p-5 text-center bg-light">
             <form onSubmit={handleSubmit} >
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" id="username" onChange={handleChange} />
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" onChange={handleChange} />
-                <button type="submit">Submit</button>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="username">Username</label>
+                    <input className="form-control" type="text" name="username" id="username" onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input className="form-control" type="password" name="password" id="password" onChange={handleChange} />
+                </div>
+                <button className="btn btn-sm btn-dark mb-3" type="submit">Submit</button>
             </form>
-            {errs.map(e => <p>{e}</p>)}
+            {errs.length ? <p className="alert alert-warning w-50 mx-auto">{errs}</p> : null}
         </div>
     )
 }

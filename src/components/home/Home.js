@@ -20,7 +20,17 @@ const Home = () => {
         )
     else return (
         <div>
-            <p>Hi there! Sign in or Register to get started.</p>
+            <div className="p-5 mb-4 bg-light rounded-3">
+                <div className="container-fluid py-5 bg-light text-center">
+                    <pre className="display-4">
+                        Welcome to Cinema!
+                    </pre>
+                    <p>Cinema is the social media application that allows you and friends to review your favorite films, television shows, video games, and more!</p>
+                    <p>To get started, register an account with us!</p>
+                    <p>If you're an existing user, login!</p>
+                    <pre className="display-6">Happy watching!</pre>
+                </div>
+            </div>
         </div>
     )
 }

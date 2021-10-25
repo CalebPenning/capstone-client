@@ -9,3 +9,11 @@ body {
 .delete-button {
   cursor: pointer;
 }
+
+body {
+  background: url(https://motionarray.imgix.net/preview-79409-lnfvtQliZJ_0009.jpg);
+}
+
+.p-5 {
+  opacity: 95%;
+}

@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import Home from "./home/Home"
 import MediaPage from "./MediaPage/MediaPage"
 import SearchPage from "./SearchPage/SearchPage"
@@ -8,6 +8,8 @@ import FollowersList from "./FollowersList/FollowersList"
 import LikedList from "./LikedList/LikedList"
 import RegisterForm from "./RegisterForm/RegisterForm"
 import LoginForm from "./LoginForm/LoginForm"
+import LogoutRedirect from "./LogoutRedirect/LogoutRedirect"
+
 
 const Routes = () => {
     return (
@@ -22,12 +24,9 @@ const Routes = () => {
                 <Route exact path="/login">
                     <LoginForm />
                 </Route>
-                <Route exact path="logout">
-                    <Redirect to="/" />
+                <Route exact path="/logout">
+                    <LogoutRedirect />
                 </Route>
-                {/* <Route path="/users/:id/reviews" >
-                    <ReviewList />
-                </Route>  */}
                 <Route exact path="/media/search" >
                     <SearchPage />
                 </Route>

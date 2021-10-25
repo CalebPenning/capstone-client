@@ -32,6 +32,10 @@ const RegisterForm = () => {
         }
     }
 
+    const comparePasswords = async (p1, p2) => {
+        
+    }
+
     const handleSubmit = async e => {
         e.preventDefault()
         if (errs.length) {
@@ -49,7 +53,7 @@ const RegisterForm = () => {
     }
 
     return (
-        <>
+        <div className="mb-3 p-5 text-center bg-light">
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
@@ -75,7 +79,7 @@ const RegisterForm = () => {
 
                 <button type="submit">Register</button>
             </form>
-        </>
+        </div>
     )
 }
 
