@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
 import CinemaApi from "../../Api"
+import UserCard from "../UserCard/UserCard"
 
 const FollowingList = () => {
     const { id } = useParams()
@@ -25,12 +25,12 @@ const FollowingList = () => {
     if (!isLoading && !following.length) return <div>This user doesn't follow anyone yet!</div>
 
     else return (
-        following.map(el => (
-            <div className="text-center" key={el.userID}>
-                <h3><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></h3>
-                <p><b>Bio: </b>{el.bio}</p>
-            </div>
-        ))
+        <div className="row text-center">
+            {following.map(el => (
+                <UserCard user={el} />
+            ))}
+        </div>
+
     )
 }
 

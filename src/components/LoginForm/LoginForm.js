@@ -59,6 +59,7 @@ const LoginForm = () => {
 
     else return (
         <div className="mb-3 p-5 text-center bg-light">
+            <h2 className="display-3 mb-3">Login</h2>
             <form onSubmit={handleSubmit} >
                 <div className="mb-3 w-50 mx-auto">
                     <label className="form-label" htmlFor="username">Username</label>
@@ -68,7 +69,7 @@ const LoginForm = () => {
                     <label className="form-label" htmlFor="password">Password</label>
                     <input className="form-control" type="password" name="password" id="password" onChange={handleChange} />
                 </div>
-                <button className="btn btn-sm btn-dark mb-3" type="submit">Submit</button>
+                <button className="btn btn-sm btn-dark mt-3" type="submit">Submit</button>
             </form>
             {errs.length ? <p className="alert alert-warning w-50 mx-auto">{errs}</p> : null}
         </div>

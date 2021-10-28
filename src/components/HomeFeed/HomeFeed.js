@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
 import UserContext from "../UserContext"
 import ReviewCard from "../ReviewCard/ReviewCard"
+import Loading from "../Loading"
 
 const HomeFeed = () => {
     const { currentUser } = useContext(UserContext)
@@ -15,19 +16,21 @@ const HomeFeed = () => {
             let res = await CinemaApi.getHomepagePosts(id)
             console.log(res)
             if (res.posts.length) setPosts(res.posts)
-            else setMessage("Follow Some Users And Get Your Homepage Set Up!")
+            else setMessage("Once you follow some friends, their latest posts will appear here!")
             setIsLoading(false)
         }
         if (isLoading && currentUser) getHomepage(currentUser.id)
     }, [isLoading, currentUser])
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <Loading />
 
     else return (
         <div className="row">
             { 
             message ?
-            message :
+            <div className="mb-3 p-5 text-center bg-light">
+                <p className="display-6">{message}</p>
+            </div> :
             posts.map(el => (
                 <ReviewCard review={el} currentUser={currentUser} key={el.reviewID} />
             ))

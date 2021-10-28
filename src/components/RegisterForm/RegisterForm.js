@@ -54,30 +54,38 @@ const RegisterForm = () => {
 
     return (
         <div className="mb-3 p-5 text-center bg-light">
-            <h2>Register</h2>
+            <h2 className="display-3 mb-3">Register</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" onChange={handleChange} />
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="username">Username</label>
+                    <input type="text" className="form-control" id="username" name="username" onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input type="password" className="form-control" id="password" name="password" onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="password2">Confirm Password</label>
+                    <input type="password" className="form-control" id="password2" name="password2" />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="firstName">First Name</label>
+                    <input type="text" className="form-control" id="firstName" name="firstName" onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="lastName">Last Name</label>
+                    <input className="form-control" type="text" id="lastName" name="lastName" onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="email">Email Address</label>
+                    <input className="form-control" type="email" id="email" name="email" onChange={handleChange} />
+                </div>
+                <div className="mb-3 w-50 mx-auto">
+                    <label className="form-label" htmlFor="bio">User Bio</label>
+                    <input className="form-control" type="text" id="bio" name="bio" onChange={handleChange} />
+                </div>
 
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" onChange={handleChange} />
-
-                <label htmlFor="password2">Confirm Password</label>
-                <input type="password" id="password2" name="password2" />
-
-                <label htmlFor="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" onChange={handleChange} />
-
-                <label htmlFor="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" onChange={handleChange} />
-
-                <label htmlFor="email">Email Address</label>
-                <input type="email" id="email" name="email" onChange={handleChange} />
-
-                <label htmlFor="bio">User Bio</label>
-                <input type="text" id="bio" name="bio" onChange={handleChange} />
-
-                <button type="submit">Register</button>
+                <button className="btn btn-sm btn-dark mt-3" type="submit">Register</button>
             </form>
         </div>
     )

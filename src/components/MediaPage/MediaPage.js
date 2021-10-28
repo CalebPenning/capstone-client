@@ -41,10 +41,10 @@ const MediaPage = () => {
     // if (showForm) return <ReviewForm media={media} />
 
     else return (
-        <div className="p-5 mb-4 bg-light rounded-3">
-            <div className="container-fluid py-5 bg-light text-center w-75 mx-auto" >
-                <h3 className="display-4">{media.Title} ({media.Year})</h3>
-                <img src={media.Poster} alt={`A poster for the ${media.Type}, ${media.Title}`} />
+        <div className="p-5 mb-3 bg-light rounded-3">
+            <div className="container-fluid py-2 bg-light text-center w-75 mx-auto" >
+                <h3 className="display-4 mb-5">{media.Title} ({media.Year})</h3>
+                <img src={media.Poster} className="mb-3" alt={`A poster for the ${media.Type}, ${media.Title}`} />
                 <p>Genre&#40;s&#41;: <b>{media.Genre}</b></p>
                 <p>Rated: <b>{media.Rated}</b></p>
                 <p>Directed by: <b>{media.Director}</b></p>

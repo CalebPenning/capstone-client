@@ -37,7 +37,7 @@ const SearchForm = ({ setData, setError }) => {
     }
 
     return (
-        <div className="container text-center">
+        <div className="mb-3 p-5 bg-light text-center">
             <form onSubmit={handleSubmit} className="container">
                 <div className="mb-3">
                     <label className="form-label" htmlFor="search-term">

@@ -25,7 +25,8 @@ const LikedList = () => {
     useEffect(() => {
         const getUserFromProfile = async id => {
             let res = await CinemaApi.getProfile(id)
-            setLikeOwner(res)
+            console.log(res)
+            setLikeOwner(res.user)
         }
         getUserFromProfile(id)
     }, [id])
@@ -33,8 +34,8 @@ const LikedList = () => {
     if (isLoading) return <div>Loading...</div>
     else if (!isLoading && likedReviews.length > 0) {
         return (
-            <div className="container">
-                <h3 className="text-center">{likeOwner.username}'s Liked Posts</h3>
+            <div className="p-5 container bg-light">
+                <h3 className="text-center mb-5">{likeOwner.username}'s Liked Posts</h3>
                 <div className="row">
                     {likedReviews.map(el => (
                         <ReviewCard review={el} currentUser={currentUser} isLoading={isLoading} setIsLoading={setIsLoading} />
