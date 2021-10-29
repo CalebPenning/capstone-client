@@ -2,11 +2,14 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import CinemaApi from "../../Api"
+import Loading from "../Loading"
+import UserCard from "../UserCard/UserCard"
 
 const FollowersList = () => {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState(true)
     const [followers, setFollowers] = useState([])
+    const [pageOwner, setPageOwner] = useState({})
 
     useEffect(() => {
         const getFollowers = async id => {
@@ -18,17 +21,44 @@ const FollowersList = () => {
         getFollowers(id)
     }, [id])
 
-    if (isLoading) return <div>Loading...</div>
+    useEffect(() => {
+        const getUserFromProfile = async id => {
+            let res = await CinemaApi.getProfile(id)
+            if (res.user) setPageOwner(res.user)
+            if (isLoading) setIsLoading(false)
+        }
+        getUserFromProfile(id)
+    }, [id, isLoading])
 
-    if (!isLoading && !followers.length) return <div>No one follows this user yet!</div>
+    if (isLoading) return <Loading />
+
+    if (!isLoading && !followers.length) return (
+        <div className="p-5 mb-4 bg-light">
+            <NavLink to={`/users/${pageOwner.id}`} 
+            className="btn btn-sm btn-primary" >
+                Go Back
+            </NavLink>
+            <div className="p-5 mb-4 bg-light text-center">
+                <pre className="display-4">
+                    Uh Oh!
+                </pre>
+                <p className="h6"><b>
+                    {pageOwner.username} doesn't have any followers yet!
+                </b>
+                </p>
+            </div>
+        </div>
+    )
 
     else return (
-        <div className="container text-center"> 
+        <div className="row p-5 bg-light text-center">
+            <div className="p-5 mb-4 bg-light">
+                <pre className="display-6">
+                    {followers.length} users follow {pageOwner.username}    
+                </pre>    
+            </div> 
             {followers.map(el => (
-                <div key={el.userID}>
-                    <h3><NavLink to={`/users/${el.userID}`}>{el.username}</NavLink></h3>
-                    <p><b>Bio: </b>{el.bio}</p>
-                </div>
+                <UserCard user={el} />
             ))}
         </div>
     )

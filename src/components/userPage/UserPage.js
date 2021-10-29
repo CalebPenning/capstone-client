@@ -28,15 +28,15 @@ const UserCard = () => {
         <div className="mb-3 p-5 bg-light text-center">
             <h3>{user.username}'s Profile</h3>
             <FollowButton userID={id} currentUser={currentUser ? currentUser : {}} />
-            <h4>Bio: </h4>
+            <h4 className="mt-3">Bio: </h4>
             <p>{user.bio}</p>
-            <h5>Reviews: </h5>
+            <NavLink className="m-1 btn btn-sm btn-secondary" to={`/users/${id}/following`}>Following</NavLink>
+            <NavLink className="m-1 btn btn-sm btn-secondary" to={`/users/${id}/followers`}>Followers</NavLink>
+            <NavLink className="m-1 btn btn-sm btn-secondary" to={`/users/${id}/likes`}>Likes</NavLink>
+            <h5 className="mt-3">Reviews: </h5>
             <div className="row">
                 <UserReviews />
             </div>
-            <h6><NavLink to={`/users/${id}/following`}>Following</NavLink></h6>
-            <h6><NavLink to={`/users/${id}/followers`}>Followers</NavLink></h6>
-            <h6><NavLink to={`/users/${id}/likes`}>Likes</NavLink></h6>
         </div>
     )
 }

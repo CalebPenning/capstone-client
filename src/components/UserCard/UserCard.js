@@ -6,8 +6,9 @@ import { useContext } from "react"
 
 const UserCard = ({ user }) => {
     const { currentUser } = useContext(UserContext)
-    
-    return (<div className="col-md-6 mb-3" key={user.userID}>
+
+    return (
+    <div className="col-md-6 mb-3" key={user.userID}>
         <div className="card">
             <div className="card-body text-center" >
               <em className="card-title">
