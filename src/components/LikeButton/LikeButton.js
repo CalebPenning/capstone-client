@@ -3,6 +3,7 @@ import CinemaApi from "../../Api"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import "./LikeButton.css"
+import Loading from "../Loading"
 
 const LikeButton = ({ user, reviewID }) => {
     const [likes, setLikes] = useState([])
@@ -33,7 +34,7 @@ const LikeButton = ({ user, reviewID }) => {
 
     let likedReviews = likes.map(el => el.reviewID)
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <Loading />
 
     if (!isLoading && likedReviews.includes(reviewID)) return (
         // <button className="btn btn-danger" onClick={unlikeReview}>Unlike</button>

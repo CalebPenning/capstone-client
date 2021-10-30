@@ -32,7 +32,9 @@ const MediaReviews = () => {
     )
 
     else return (
-        <div>No user reviews for this media yet!</div>
+        <div>
+            <p className="mb-3 h5">No user reviews for this media yet!</p>
+        </div>
     )
 }
 

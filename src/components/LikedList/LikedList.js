@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
 import ReviewCard from "../ReviewCard/ReviewCard"
 import UserContext from "../UserContext"
+import Loading from "../Loading"
 
 const LikedList = () => {
     const { id } = useParams()
@@ -31,7 +32,8 @@ const LikedList = () => {
         getUserFromProfile(id)
     }, [id])
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <Loading />
+
     else if (!isLoading && likedReviews.length > 0) {
         return (
             <div className="p-5 container bg-light">
@@ -45,7 +47,12 @@ const LikedList = () => {
         )
     }
 
-    else return <div>This user doesn't have any liked posts.</div>
+    else return (
+        <div className="p-5 text-center bg-light">
+            <pre className="display-6">Uh Oh!</pre>
+            <p className="h4">This user doesn't have any liked posts.</p>
+        </div>
+    )
 }
 
 export default LikedList
