@@ -1,6 +1,6 @@
 import UserContext from "../UserContext"
 import CinemaApi from "../../Api"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 
 const ReviewForm = ({ media}) => {
@@ -12,12 +12,14 @@ const ReviewForm = ({ media}) => {
     const initialState = {
         userID,
         movieID,
+        title: "",
         rating: 0,
         body: ""
     }
 
     const [formData, setFormData] = useState(initialState)
     const [hasPosted, setHasPosted] = useState(false)
+    const [err, setErr] = useState("")
 
     const handleChange = e => {
         let { name, value } = e.target
@@ -30,7 +32,18 @@ const ReviewForm = ({ media}) => {
     
     const handleSubmit = async e => {
         e.preventDefault()
-        console.log(formData, hasPosted)
+        if (!formData.title.trim()) {
+            setErr("Write a title for your review")
+            return
+        }
+        if (formData.rating < 1) {
+            setErr("Please select a rating")
+            return
+        }
+        if (!formData.body.trim()) {
+            setErr("Look. If you're gonna write a review, it's gotta have a body. Call me old-fashioned.")
+            return
+        }
         let res = await CinemaApi.postReview(formData)
         if (!res.created) {
             console.log(res)
@@ -38,6 +51,13 @@ const ReviewForm = ({ media}) => {
         }
         setHasPosted(!hasPosted)
     }
+
+    useEffect(() => {
+        const errCleanUp = () => {
+            setTimeout(() => setErr(""), 3000)
+        }
+        if (err) errCleanUp()
+    })
 
     if (!userID || !movieID) return <Redirect to={`/media/search`} />
 
@@ -47,6 +67,7 @@ const ReviewForm = ({ media}) => {
     else return (
         <div className="mb-3 review-form">
             <h3 className="mb-3">Write a review for {media.Title}</h3>
+            { err ? <div className="alert alert-danger">{err}</div> : null}
             <form onSubmit={handleSubmit}>
                 <div className="mb-3 w-50 mx-auto">
                     <label className="form-label" htmlFor="title">Title</label>

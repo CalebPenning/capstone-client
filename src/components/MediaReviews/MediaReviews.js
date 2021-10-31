@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react"
 import CinemaApi from "../../Api"
 import UserContext from "../UserContext"
 import ReviewCard from "../ReviewCard/ReviewCard"
+import Loading from "../Loading"
 
 const MediaReviews = () => {
     const { imdbID } = useParams()
@@ -19,15 +20,15 @@ const MediaReviews = () => {
         if (isLoading) getReviews(imdbID)
     }, [imdbID, isLoading])
 
-    if (!reviews.length && isLoading) return (
-        <div>
-            Loading...
-        </div>
-    )
+    if (!reviews.length && isLoading) return <Loading />
 
     else if (reviews.length && !isLoading) return (
         reviews.map(el => (
-                <ReviewCard review={el} currentUser={currentUser} isLoading={isLoading} setIsLoading={setIsLoading} />
+                <ReviewCard 
+                review={el} 
+                currentUser={currentUser} 
+                isLoading={isLoading} 
+                setIsLoading={setIsLoading} />
         ))
     )
 

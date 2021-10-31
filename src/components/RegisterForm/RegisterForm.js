@@ -32,8 +32,14 @@ const RegisterForm = () => {
         }
     }
 
+    const getPasswordComp = (stateInput, compInput) => {
+
+    }
+
     const comparePasswords = async (p1, p2) => {
-        
+        if (p2 !== p1) {
+            // do something (error handling, ???)
+        }
     }
 
     const handleSubmit = async e => {
